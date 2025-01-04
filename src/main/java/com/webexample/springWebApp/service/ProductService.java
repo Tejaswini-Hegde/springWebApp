@@ -20,10 +20,29 @@ public class ProductService {
     public Product getProductByID(int prodID) {
         return products.stream()
                 .filter(p -> p.getProdID() == prodID )
-                .findFirst().orElse(new Product(100,"No Items in the List",0));
+                 .findFirst().orElse(new Product(100,"No Items in the List",0));
     }
 
     public void addProduct(Product prod){
         products.add(prod);
+    }
+
+    public void updateProduct(Product prod) {
+        int index= -1;
+        for (int i=0; i<products.size();i++)
+            if(products.get(i).getProdID() == prod.getProdID())
+                index=i;
+
+        products.set(index,prod);
+
+    }
+
+    public void deleteProduct(int prodID) {
+        int index= -1;
+        for (int i=0; i<products.size();i++)
+            if(products.get(i).getProdID() == prodID)
+                index=i;
+
+        products.remove(index);
     }
 }
